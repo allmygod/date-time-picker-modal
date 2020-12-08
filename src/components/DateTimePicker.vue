@@ -11,7 +11,7 @@
               <li
                 v-for="(date, index) in dates"
                 :key="index"
-                :class="selected.date.toDateString()===date.val.toDateString() && highlightDate ? 'active' : ''"
+                :class="selected.date && selected.date.toDateString()===date.val.toDateString() && highlightDate ? 'active' : ''"
                 @click="handleSelectDate(index)"
                 >
                 {{date.title}}
@@ -22,8 +22,9 @@
             <v-date-picker
               :color="highlightDate ? 'blue' : ''"
               :value="selected.date"
-              :from-date="selected.date"
+              :from-date="selected.date || new Date()"
               :available-dates="[{start: previousDate}]"
+              :attributes="attrs"
               @input="handleDatePick"
               @dayclick="handleDateClick"
               />
@@ -85,12 +86,15 @@ export default {
         { title: 'Next Month', val: nextMonth() },
         { title: 'Next Year', val: nextYear() },
       ],
-      highlightDate: true,
+      attrs: [
+        { key: 'today', dot: 'red', dates: new Date() }
+        ],
+      highlightDate: false,
       dateChanged: false,
       selected: {
         hour: 12,
         ampm: 'AM',
-        date: new Date()
+        date: null
       }
     }
   },
@@ -110,7 +114,13 @@ export default {
       this.selected.date = date;
       this.dateChanged = true;
     },
-    handleDateClick() {
+    handleDateClick(day) {
+      const clickedDate = new Date(day.id);
+      clickedDate.setHours(0, 0, 0, 0);
+      const todayDate = new Date();
+      todayDate.setHours(0, 0, 0, 0);
+      if(clickedDate < todayDate) return;
+
       // if clicked the same date, then only this method will be invoked.
       this.highlightDate = this.dateChanged;
       this.dateChanged = !this.dateChanged;
