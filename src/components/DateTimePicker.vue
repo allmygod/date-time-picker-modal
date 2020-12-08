@@ -87,8 +87,14 @@ export default {
         { title: 'Next Year', val: nextYear() },
       ],
       attrs: [
-        { key: 'today', dot: 'red', dates: new Date() }
-        ],
+        { 
+          key: 'today', 
+          highlight: {
+            contentClass: 'text-blue-800' 
+          },
+          dates: new Date() 
+        }
+      ],
       highlightDate: false,
       dateChanged: false,
       selected: {
