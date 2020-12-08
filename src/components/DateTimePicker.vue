@@ -126,13 +126,13 @@ export default {
       this.dateChanged = !this.dateChanged;
     },
     handleResetDate() {
-      this.selected.date = new Date();
+      this.selected.date = null;
       this.$refs.selectHour.options[0].selected = true;
       this.selected.hour = 12;
       this.$refs.selectAmPm.options[0].selected = true;
       this.selected.ampm = 'AM';
 
-      this.highlightDate = true;
+      this.highlightDate = false;
     },
     handleUpdate() {
       this.$emit('update', this.selected);
