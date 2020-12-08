@@ -1,4 +1,10 @@
 # datetime-picker
+<center><img src="./public/date-time-picker-modal.png" alt="screenshot" /></center>
+
+## References
+Please check the following files.
+
+- src/components/DateTimePicker.vue
 
 ## Project setup
 ```
