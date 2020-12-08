@@ -1,5 +1,5 @@
 # datetime-picker
-<center><img src="./public/date-time-picker-modal.png" alt="screenshot" /></center>
+<img src="./public/date-time-picker-modal.png" alt="screenshot" />
 
 ## References
 Please check the following files.
